@@ -14,6 +14,7 @@ get '/auth/twitter/callback' do
   redirect to('/')
 end
 get '/auth/failure' do
+  logout_user
   "failed =("
 end
 
