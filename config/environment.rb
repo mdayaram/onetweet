@@ -51,18 +51,26 @@ configure :production do
 end
 
 helpers do
+  def login_user(env)
+    session[:uid] = env['omniauth.auth']['uid']
+    session[:nick] = env['omniauth.auth']['info']['nickname']
+  end
+  def logout_user
+    session[:uid] = nil
+    session[:nick] = nil
+  end
   def current_user_id
     session[:uid]
   end
   def current_user_nick
-    session[:user]
+    session[:nick]
   end
   def logged_in?
     !session[:uid].nil?
   end
 
   def tweet_footer
-    "\" - #{session[:user]}"
+    "\" - #{current_user_nick}"
   end
   def tweet_header
     "\""

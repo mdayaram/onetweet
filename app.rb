@@ -10,7 +10,7 @@ end
 
 # OmniAuth routes
 get '/auth/twitter/callback' do
-  session[:uid] = env['omniauth.auth']['uid']
+  login_user(env)
   redirect to('/')
 end
 get '/auth/failure' do
