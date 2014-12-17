@@ -1,0 +1,9 @@
+.owner
+	What would you say if you only had one tweet?
+
+	Can't think of anything? Need some time?
+
+	That's ok, it's good to stop and think about it.  Why not take some time to ponder and come back here when you feel you've found what you want to say?
+	.tweets
+		- @tweets.each do |t|
+			.tweet= "#{t.user}: #{t.message}"

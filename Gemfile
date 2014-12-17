@@ -1,36 +1,23 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.0.rc2'
+ruby "2.0.0"
 
+gem 'bundler'
+gem 'sinatra'
+gem 'activerecord'
+gem 'sinatra-activerecord'
+gem 'sinatra-flash'
+gem 'sinatra-redirect-with-flash'
+gem 'sass'
 gem 'haml'
-gem 'omniauth'
-gem 'omniauth-twitter'
-gem 'rails_12factor'
+gem 'rake'
 gem 'twitter'
-gem 'twitter-text'
 
-group :assets do
-  gem 'sass-rails', '>= 4.0.3'
-  gem 'uglifier'
+group :development do
+  gem 'sqlite3'
+  gem 'tux'
 end
 
 group :production do
-  gem 'puma'
-end
-
-group :development do
-  gem 'spring'
-end
-
-group :test do
-  gem 'coveralls', require: false
-  gem 'mocha', require: false
-  gem 'rubocop'
-  gem 'simplecov', require: false
-  gem 'webmock'
-end
-
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
+  gem 'pg'
 end
