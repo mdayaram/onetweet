@@ -14,6 +14,7 @@ configure do
   set :app_file, File.expand_path(File.join(File.dirname(__FILE__), "..", "app.rb"))
   set :haml, { :format => :html5 }
 
+  use Rack::Session::Cookie
   use OmniAuth::Builder do
     provider :twitter, ENV["AUTH_CONSUMER_KEY"], ENV["AUTH_CONSUMER_SECRET"],
       {
