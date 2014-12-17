@@ -19,6 +19,8 @@ end
 
 get '/' do
   @tweets = Tweet.order("created_at DESC")
+  @greets = "Hi there!"
+  @greets = "Hi there #{current_user_nick}" if logged_in?
 
   # stub entry
   @tweets << Tweet.new
