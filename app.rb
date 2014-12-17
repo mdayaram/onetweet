@@ -24,11 +24,6 @@ get '/' do
   @greets = "Hi there!"
   @greets = "Hi there #{current_user_nick}" if logged_in?
 
-  # stub entry
-  @tweets << Tweet.new
-  @tweets[0].message = "my single tweet ever!"
-  @tweets[0].user = "noj"
-
   haml :index
 end
 
