@@ -18,6 +18,7 @@ get '/auth/failure' do
   "failed =("
 end
 
+# Regular routes
 get '/' do
   @tweets = Tweet.order("created_at DESC")
   @greets = "Hi there!"
@@ -25,9 +26,8 @@ get '/' do
 
   # stub entry
   @tweets << Tweet.new
-  @tweets[0].message = "hi there"
+  @tweets[0].message = "my single tweet ever!"
   @tweets[0].user = "noj"
 
   haml :index
 end
-
