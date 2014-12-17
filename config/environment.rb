@@ -75,10 +75,10 @@ helpers do
   end
 
   def tweet_footer
-    "\" - #{current_user_nick}"
+    " - #{current_user_nick}"
   end
   def tweet_header
-    "\""
+    ""
   end
 
   def trim_message(msg)
