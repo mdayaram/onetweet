@@ -11,6 +11,8 @@ gem 'sinatra-redirect-with-flash'
 gem 'sass'
 gem 'haml'
 gem 'rake'
+gem 'omniauth'
+gem 'omniauth-twitter'
 gem 'twitter'
 
 group :development do

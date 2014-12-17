@@ -6,12 +6,21 @@ require 'active_record'
 require 'sinatra/activerecord'
 require 'haml'
 require 'sass'
+require 'omniauth-twitter'
 require 'twitter'
 
 configure do
   set :server, 'webrick' # needed because sinatra thinks the twitter gem is a server.
   set :app_file, File.expand_path(File.join(File.dirname(__FILE__), "..", "app.rb"))
   set :haml, { :format => :html5 }
+
+  use Rack::Session::Cookie
+  use OmniAuth::Builder do
+    provider :twitter, ENV["TWITTER_CONSUMER_KEY"], ENV["TWITTER_CONSUMER_SECRET"],
+      {
+      :authorize_params => { :force_login => 'true' }
+    }
+  end
 end
 
 configure :development do
@@ -32,18 +41,41 @@ configure :production do
     :encoding => 'utf8'
   )
 
-  twitter_client = Twitter::REST::Client.new do |config|
+  onetweet_client = Twitter::REST::Client.new do |config|
     config.consumer_key = ENV["TWITTER_CONSUMER_KEY"]
     config.consumer_secret = ENV["TWITTER_CONSUMER_SECRET"]
     config.access_token = ENV["TWITTER_ACCESS_TOKEN"]
     config.access_token_secret = ENV["TWITTER_ACCESS_SECRET"]
   end
-  #set :twitter, twitter_client
-  set :twitter, nil # account got suspended for spam, stop tweeting for now until we have a solution.
+  set :onetweet, onetweet_client
 end
 
 helpers do
-  def tweet(user, msg)
-    settings.twitter.update(msg) if !settings.twitter.nil?
+  def current_user_id
+    session[:uid]
+  end
+  def current_user_nick
+    session[:user]
+  end
+  def logged_in?
+    !session[:uid].nil?
+  end
+
+  def tweet_footer
+    "\" - #{session[:user]}"
+  end
+  def tweet_header
+    "\""
+  end
+
+  def onetweet(msg)
+    raise "Need to be logged in to tweet!" if !logged_in?
+    cap = 140 - tweet_footer.length - tweet_header.length - msg.length
+    if cap < 0
+      # remove the excess from the message, minus 3 for an added ellipse.
+      msg = msg[0..(msg.length + cap - 1 - 3)] + "..."
+    end
+    message = "#{tweet_header}#{msg}#{tweet_footer}"
+    settings.onetweet.update(message) if !settings.onetweet.nil?
   end
 end
