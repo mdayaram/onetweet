@@ -33,7 +33,7 @@ get '/' do
 end
 
 post '/tweet' do
-  redirect to("/auth/twitter") if !logged_in
+  redirect to("/auth/twitter") if !logged_in?
   message = params[:message]
   if message.nil? || message.empty?
     redirect to("/invalid?message=#{message}")
