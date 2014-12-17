@@ -40,7 +40,7 @@ post '/tweet' do
   end
 
   tweet = Tweet.new
-  tweet.user = current_user_nic
+  tweet.user = current_user_nick
   tweet.uid = current_user_id
   tweet.message = trim_message(message)
 
