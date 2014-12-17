@@ -76,14 +76,18 @@ helpers do
     "\""
   end
 
-  def onetweet(msg)
-    raise "Need to be logged in to tweet!" if !logged_in?
+  def trim_message(msg)
     cap = 140 - tweet_footer.length - tweet_header.length - msg.length
     if cap < 0
       # remove the excess from the message, minus 3 for an added ellipse.
       msg = msg[0..(msg.length + cap - 1 - 3)] + "..."
     end
-    message = "#{tweet_header}#{msg}#{tweet_footer}"
+    msg
+  end
+
+  def onetweet(tweet)
+    raise "Need to be logged in to tweet!" if !logged_in?
+    message = "#{tweet_header}#{trim_message(tweet.message)}#{tweet_footer}"
     settings.onetweet.update(message) if !settings.onetweet.nil?
   end
 end

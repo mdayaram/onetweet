@@ -31,3 +31,23 @@ get '/' do
 
   haml :index
 end
+
+post '/tweet' do
+  redirect to("/auth/twitter") if !logged_in
+  message = params[:message]
+  if message.nil? || message.empty?
+    redirect to("/invalid?message=#{message}")
+  end
+
+  tweet = Tweet.new
+  tweet.user = current_user_nic
+  tweet.uid = current_user_id
+  tweet.message = trim_message(message)
+
+  if tweet.save
+    onetweet(tweet)
+    redirect to("/")
+  else
+    redirect to("/?error")
+  end
+end
