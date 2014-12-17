@@ -69,6 +69,11 @@ helpers do
     !session[:uid].nil?
   end
 
+  def twatted?
+    false if !logged_in?
+    Tweet.where(uid: current_user_id)
+  end
+
   def tweet_footer
     "\" - #{current_user_nick}"
   end
@@ -87,6 +92,7 @@ helpers do
 
   def onetweet(tweet)
     raise "Need to be logged in to tweet!" if !logged_in?
+    raise "You have already tweeted!" if twatted?
     message = "#{tweet_header}#{trim_message(tweet.message)}#{tweet_footer}"
     settings.onetweet.update(message) if !settings.onetweet.nil?
   end

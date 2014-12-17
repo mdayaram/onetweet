@@ -28,7 +28,9 @@ get '/' do
 end
 
 post '/tweet' do
-  redirect to("/auth/twitter") if !logged_in?
+  raise "You need to login to tweet!" if !logged_in?
+  raise "You've already tweeted!" if twatted?
+
   message = params[:message]
   if message.nil? || message.empty?
     redirect to("/invalid?message=#{message}")
