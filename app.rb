@@ -17,6 +17,10 @@ get '/auth/failure' do
   logout_user
   "failed =("
 end
+get '/logout' do
+  logout_user
+  redirect to("/")
+end
 
 # Regular routes
 get '/' do
@@ -33,7 +37,7 @@ post '/tweet' do
 
   message = params[:message]
   if message.nil? || message.empty?
-    redirect to("/invalid?message=#{message}")
+    redirect to("/")
   end
 
   tweet = Tweet.new
