@@ -14,9 +14,8 @@ configure do
   set :app_file, File.expand_path(File.join(File.dirname(__FILE__), "..", "app.rb"))
   set :haml, { :format => :html5 }
 
-  use Rack::Session::Cookie
   use OmniAuth::Builder do
-    provider :twitter, ENV["TWITTER_CONSUMER_KEY"], ENV["TWITTER_CONSUMER_SECRET"],
+    provider :twitter, ENV["AUTH_CONSUMER_KEY"], ENV["AUTH_CONSUMER_SECRET"],
       {
       :authorize_params => { :force_login => 'true' }
     }
@@ -42,10 +41,10 @@ configure :production do
   )
 
   onetweet_client = Twitter::REST::Client.new do |config|
-    config.consumer_key = ENV["TWITTER_CONSUMER_KEY"]
-    config.consumer_secret = ENV["TWITTER_CONSUMER_SECRET"]
-    config.access_token = ENV["TWITTER_ACCESS_TOKEN"]
-    config.access_token_secret = ENV["TWITTER_ACCESS_SECRET"]
+    config.consumer_key = ENV["ONETWEET_CONSUMER_KEY"]
+    config.consumer_secret = ENV["ONETWEET_CONSUMER_SECRET"]
+    config.access_token = ENV["ONETWEET_ACCESS_TOKEN"]
+    config.access_token_secret = ENV["ONETWEET_ACCESS_SECRET"]
   end
   set :onetweet, onetweet_client
 end
