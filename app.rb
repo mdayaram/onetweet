@@ -70,7 +70,7 @@ def onetweet(tweet)
 end
 
 def tweet_footer
-  " - #{user_nick}"
+  " - @#{user_nick}"
 end
 def tweet_header
   ""
