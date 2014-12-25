@@ -61,6 +61,7 @@ helpers do
   def logout_user
     session[:uid] = nil
     session[:nick] = nil
+    session[:tweet] = nil
   end
   def logged_in?
     !session[:uid].nil?
