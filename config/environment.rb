@@ -52,8 +52,11 @@ end
 
 helpers do
   def login_user(env)
+    session[:tweet] = nil
     session[:uid] = env['omniauth.auth']['uid']
     session[:nick] = env['omniauth.auth']['info']['nickname']
+    tweet = Tweet.where(uid: session[:uid])
+    session[:tweet] = tweet if !tweet.nil? and !tweet.empty?
   end
   def logout_user
     session[:uid] = nil
@@ -71,7 +74,7 @@ helpers do
 
   def twatted?
     false if !logged_in?
-    Tweet.where(uid: current_user_id)
+    session[:tweet]
   end
 
   def tweet_footer
@@ -95,5 +98,6 @@ helpers do
     raise "You have already tweeted!" if twatted?
     message = "#{tweet_header}#{trim_message(tweet.message)}#{tweet_footer}"
     settings.onetweet.update(message) if !settings.onetweet.nil?
+    settings[:tweet] = tweet.message
   end
 end
