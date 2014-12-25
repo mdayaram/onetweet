@@ -52,16 +52,12 @@ end
 
 helpers do
   def login_user(env)
-    session[:tweet] = nil
     session[:uid] = env['omniauth.auth']['uid']
     session[:nick] = env['omniauth.auth']['info']['nickname']
-    tweet = Tweet.where(uid: session[:uid]).first
-    session[:tweet] = tweet.message if !tweet.nil?
   end
   def logout_user
     session[:uid] = nil
     session[:nick] = nil
-    session[:tweet] = nil
   end
   def logged_in?
     !session[:uid].nil?
@@ -71,35 +67,6 @@ helpers do
   end
   def user_nick
     session[:nick]
-  end
-  def user_tweet
-    session[:tweet]
-  end
-
-  def onetweet(tweet)
-    raise "Need to be logged in to tweet!" if !logged_in?
-    raise "You have already tweeted!" if !user_tweet.nil?
-    message = "#{tweet_header}#{trim_message(tweet.message)}#{tweet_footer}"
-    settings.onetweet.update(message) if !settings.onetweet.nil?
-    session[:tweet] = tweet.message
-  end
-
-  private
-
-  def tweet_footer
-    " - #{user_nick}"
-  end
-  def tweet_header
-    ""
-  end
-
-  def trim_message(msg)
-    cap = 140 - tweet_footer.length - tweet_header.length - msg.length
-    if cap < 0
-      # remove the excess from the message, minus 3 for an added ellipse.
-      msg = msg[0..(msg.length + cap - 1 - 3)] + "..."
-    end
-    msg
   end
 
 end
