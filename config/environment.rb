@@ -62,23 +62,31 @@ helpers do
     session[:uid] = nil
     session[:nick] = nil
   end
-  def current_user_id
-    session[:uid]
-  end
-  def current_user_nick
-    session[:nick]
-  end
   def logged_in?
     !session[:uid].nil?
   end
-
-  def twatted?
-    false if !logged_in?
+  def user_id
+    session[:uid]
+  end
+  def user_nick
+    session[:nick]
+  end
+  def user_tweet
     session[:tweet]
   end
 
+  def onetweet(tweet)
+    raise "Need to be logged in to tweet!" if !logged_in?
+    raise "You have already tweeted!" if twatted?
+    message = "#{tweet_header}#{trim_message(tweet.message)}#{tweet_footer}"
+    settings.onetweet.update(message) if !settings.onetweet.nil?
+    settings[:tweet] = tweet.message
+  end
+
+  private
+
   def tweet_footer
-    " - #{current_user_nick}"
+    " - #{user_nick}"
   end
   def tweet_header
     ""
@@ -93,11 +101,4 @@ helpers do
     msg
   end
 
-  def onetweet(tweet)
-    raise "Need to be logged in to tweet!" if !logged_in?
-    raise "You have already tweeted!" if twatted?
-    message = "#{tweet_header}#{trim_message(tweet.message)}#{tweet_footer}"
-    settings.onetweet.update(message) if !settings.onetweet.nil?
-    settings[:tweet] = tweet.message
-  end
 end

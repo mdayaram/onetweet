@@ -26,14 +26,14 @@ end
 get '/' do
   @tweets = Tweet.order("created_at DESC")
   @greets = "Hi there!"
-  @greets = "Hi there #{current_user_nick}" if logged_in?
+  @greets = "Hi there #{user_nick}" if logged_in?
 
   haml :index
 end
 
 post '/tweet' do
   raise "You need to login to tweet!" if !logged_in?
-  raise "You've already tweeted!" if twatted?
+  raise "You've already tweeted!" if !user_tweet.nil?
 
   message = params[:message]
   if message.nil? || message.empty?
@@ -41,8 +41,8 @@ post '/tweet' do
   end
 
   tweet = Tweet.new
-  tweet.user = current_user_nick
-  tweet.uid = current_user_id
+  tweet.user = user_nick
+  tweet.uid = user_id
   tweet.message = trim_message(message)
 
   if tweet.save

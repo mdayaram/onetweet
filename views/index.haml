@@ -1,10 +1,10 @@
 .owner
 	%p
 		= @greets
-	- if twatted?
+	- if !user_tweet.nil?
 		%p I see you've already tweeted this beautiful phrase:
 		%p
-			= twatted?
+			= user_tweet
 		%p Thank you for your tweet.
 	- else
 		%p
