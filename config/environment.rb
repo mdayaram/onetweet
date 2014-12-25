@@ -81,7 +81,7 @@ helpers do
     raise "You have already tweeted!" if !user_tweet.nil?
     message = "#{tweet_header}#{trim_message(tweet.message)}#{tweet_footer}"
     settings.onetweet.update(message) if !settings.onetweet.nil?
-    settings[:tweet] = tweet.message
+    session[:tweet] = tweet.message
   end
 
   private
