@@ -56,7 +56,7 @@ helpers do
     session[:uid] = env['omniauth.auth']['uid']
     session[:nick] = env['omniauth.auth']['info']['nickname']
     tweet = Tweet.where(uid: session[:uid]).first
-    session[:tweet] = tweet.message if !tweet.nil? and !tweet.empty?
+    session[:tweet] = tweet.message if !tweet.nil?
   end
   def logout_user
     session[:uid] = nil
