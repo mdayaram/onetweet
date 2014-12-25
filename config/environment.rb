@@ -78,7 +78,7 @@ helpers do
 
   def onetweet(tweet)
     raise "Need to be logged in to tweet!" if !logged_in?
-    raise "You have already tweeted!" if twatted?
+    raise "You have already tweeted!" if !user_tweet.nil?
     message = "#{tweet_header}#{trim_message(tweet.message)}#{tweet_footer}"
     settings.onetweet.update(message) if !settings.onetweet.nil?
     settings[:tweet] = tweet.message
