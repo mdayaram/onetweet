@@ -4,10 +4,12 @@ require_relative './config/environment'
 require_relative './models/tweet'
 
 before do
+  @tweets = Tweet.order("created_at DESC")
   @user_tweet = nil
   if logged_in?
     tweet = Tweet.where(uid: user_id).first
     @user_tweet = tweet.message if !tweet.nil?
+    @user_nick = user_nick
   end
 end
 
@@ -32,11 +34,13 @@ end
 
 # Regular routes
 get '/' do
-  @tweets = Tweet.order("created_at DESC")
-  @greets = "Hi there!"
-  @greets = "Hi there #{user_nick}" if logged_in?
-
-  haml :index
+  if !logged_in?
+    haml :'index/new'
+  elsif @user_tweet.nil?
+    haml :'index/ready'
+  else
+    haml :'index/done'
+  end
 end
 
 post '/tweet' do

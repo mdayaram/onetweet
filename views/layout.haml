@@ -6,4 +6,9 @@
 		%title No Typos, Please
 		%link{:href=>'/styles/main.css', :media => "screen", :rel => 'stylesheet', :type => "text/css"}
 	%body
-		= yield
+		.content
+			= yield
+
+			.tweets
+				- @tweets.each do |t|
+					.tweet= "#{t.user}: #{t.message}"

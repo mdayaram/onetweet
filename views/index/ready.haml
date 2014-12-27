@@ -1,0 +1,16 @@
+%p
+	= "Hi there @#{@user_nick}!"
+%p
+	What would you say if you only had one tweet?
+%p
+	Can't think of anything? Need some time?
+%p
+	That's ok, it's good to stop and think about it.  Why not take some time to ponder and come back here when you feel you've found what you want to say?
+%p
+	%a{ :href => "/logout" } logout
+%p
+	%form{ :action => "/tweet", :method => "post" }
+		%label What will you say?
+		%input{ :id => "message", :name => "message", :type => "text" }
+		%input{ :type => "submit", :value => "tweet!" }
+

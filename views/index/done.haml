@@ -1,0 +1,9 @@
+%p
+	= "Hi there @#{@user_nick}!"
+%p I see you've already tweeted this beautiful phrase:
+%p
+	= @user_tweet
+%p Thank you for your tweet.
+%p
+	%a{ :href => "/logout" } logout
+
