@@ -8,6 +8,7 @@ require 'haml'
 require 'sass'
 require 'omniauth-twitter'
 require 'twitter'
+require_relative '../models/tweet'
 
 configure do
   set :server, 'webrick' # needed because sinatra thinks the twitter gem is a server.
@@ -26,7 +27,6 @@ end
 configure :development do
   set :database, 'sqlite:///db/dev.sqlite3'
   set :show_exceptions, true
-  set :twitter, nil
 end
 
 configure :production do
@@ -47,7 +47,7 @@ configure :production do
     config.access_token = ENV["ONETWEET_ACCESS_TOKEN"]
     config.access_token_secret = ENV["ONETWEET_ACCESS_SECRET"]
   end
-  set :twitter, twitter_client
+  Tweet.client = twitter_client
 end
 
 helpers do

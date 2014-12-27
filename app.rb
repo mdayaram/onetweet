@@ -66,7 +66,7 @@ def publish(tweet)
   raise "Need to be logged in to tweet!" if !logged_in?
   raise "You have already tweeted!" if !@user_tweet.nil?
   message = "#{tweet_header}#{trim_message(tweet.message)}#{tweet_footer}"
-  settings.twitter.update(message) if !settings.twitter.nil?
+  Tweet.client.update(message) if !Tweet.client.nil?
 end
 
 def tweet_footer
