@@ -4,6 +4,8 @@ class Tweet < ActiveRecord::Base
   @@client = nil # initialized in environment.
 
   validates :uid, uniqueness: true
+  validates :message, presence: true
+
   before_save :trim_message
   after_save :publish
 
