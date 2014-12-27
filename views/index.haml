@@ -6,6 +6,8 @@
 		%p
 			= @user_tweet
 		%p Thank you for your tweet.
+		%p
+			%a{ :href => "/logout" } logout
 	- else
 		%p
 			What would you say if you only had one tweet?
