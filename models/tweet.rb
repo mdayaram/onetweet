@@ -2,6 +2,7 @@ require 'sinatra/activerecord'
 
 class Tweet < ActiveRecord::Base
   @@client = nil # initialized in environment.
+  before_save :trim_message
   after_save :publish
 
   def self.client=(client)
@@ -24,13 +25,13 @@ class Tweet < ActiveRecord::Base
     ""
   end
 
-  def trim_message(msg)
-    cap = 140 - tweet_footer.length - tweet_header.length - msg.length
+  def trim_message
+    cap = 140 - tweet_footer.length - tweet_header.length - @message.length
     if cap < 0
       # remove the excess from the message, minus 3 for an added ellipse.
-      msg = msg[0..(msg.length + cap - 1 - 3)] + "..."
+      @message = @message[0..(@message.length + cap - 1 - 3)] + "..."
     end
-    msg
+    true
   end
 
 end

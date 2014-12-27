@@ -51,7 +51,7 @@ post '/tweet' do
   tweet = Tweet.new
   tweet.user = user_nick
   tweet.uid = user_id
-  tweet.message = trim_message(message)
+  tweet.message = message
 
   if tweet.save
     redirect to("/")
