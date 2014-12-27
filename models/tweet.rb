@@ -17,7 +17,7 @@ class Tweet < ActiveRecord::Base
     msg = "#{tweet_header}#{message}#{tweet_footer}"
     raise "Message longer than 140 characters!" if msg.length > 140
     @@client.update(msg) if !@@client.nil?
-    logger.puts "TWEET: #{msg}"
+    puts "TWEET: #{msg}"
   end
 
   def tweet_footer
