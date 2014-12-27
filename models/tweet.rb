@@ -14,7 +14,8 @@ class Tweet < ActiveRecord::Base
   private
 
   def publish
-    msg = "#{tweet_header}#{trim_message(message)}#{tweet_footer}"
+    msg = "#{tweet_header}#{message}#{tweet_footer}"
+    raise "Message longer than 140 characters!" if msg.length > 140
     @@client.update(msg) if !@@client.nil?
     logger.puts "TWEET: #{msg}"
   end
