@@ -18,7 +18,7 @@ class Tweet < ActiveRecord::Base
   end
 
   def tweet_footer
-    " - @#{user_nick}"
+    " - @#{@user}"
   end
 
   def tweet_header
