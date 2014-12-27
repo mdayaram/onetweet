@@ -48,10 +48,11 @@ post '/tweet' do
     redirect to("/")
   end
 
-  tweet = Tweet.new
-  tweet.user = user_nick
-  tweet.uid = user_id
-  tweet.message = message
+  tweet = Tweet.new do |t|
+    t.user = user_nick
+    t.uid = user_id
+    t.message = message
+  end
 
   if tweet.save
     redirect to("/")
