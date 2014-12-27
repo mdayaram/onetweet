@@ -54,32 +54,8 @@ post '/tweet' do
   tweet.message = trim_message(message)
 
   if tweet.save
-    publish(tweet)
     redirect to("/")
   else
     redirect to("/?error")
   end
-end
-
-# Misc helper stuff.
-def publish(tweet)
-  raise "Need to be logged in to tweet!" if !logged_in?
-  raise "You have already tweeted!" if !@user_tweet.nil?
-  message = "#{tweet_header}#{trim_message(tweet.message)}#{tweet_footer}"
-  Tweet.client.update(message) if !Tweet.client.nil?
-end
-
-def tweet_footer
-  " - @#{user_nick}"
-end
-def tweet_header
-  ""
-end
-def trim_message(msg)
-  cap = 140 - tweet_footer.length - tweet_header.length - msg.length
-  if cap < 0
-    # remove the excess from the message, minus 3 for an added ellipse.
-    msg = msg[0..(msg.length + cap - 1 - 3)] + "..."
-  end
-  msg
 end
