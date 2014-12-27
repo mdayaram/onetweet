@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141225090458) do
+ActiveRecord::Schema.define(version: 20141227091151) do
 
   create_table "tweets", force: true do |t|
     t.string   "user"
@@ -19,5 +19,7 @@ ActiveRecord::Schema.define(version: 20141225090458) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "tweets", ["uid"], name: "index_tweets_on_uid", unique: true
 
 end
