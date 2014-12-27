@@ -3,7 +3,7 @@ require 'sinatra/activerecord'
 class Tweet < ActiveRecord::Base
   @@client = nil # initialized in environment.
 
-  validates :user_id, uniqueness: true
+  validates :uid, uniqueness: true
   before_save :trim_message
   after_save :publish
 
