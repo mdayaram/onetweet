@@ -54,7 +54,7 @@ post '/tweet' do
   tweet.message = trim_message(message)
 
   if tweet.save
-    onetweet(tweet)
+    publish(tweet)
     redirect to("/")
   else
     redirect to("/?error")
@@ -62,11 +62,11 @@ post '/tweet' do
 end
 
 # Misc helper stuff.
-def onetweet(tweet)
+def publish(tweet)
   raise "Need to be logged in to tweet!" if !logged_in?
   raise "You have already tweeted!" if !@user_tweet.nil?
   message = "#{tweet_header}#{trim_message(tweet.message)}#{tweet_footer}"
-  settings.onetweet.update(message) if !settings.onetweet.nil?
+  settings.twitter.update(message) if !settings.twitter.nil?
 end
 
 def tweet_footer

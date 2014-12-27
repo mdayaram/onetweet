@@ -41,13 +41,13 @@ configure :production do
     :encoding => 'utf8'
   )
 
-  onetweet_client = Twitter::REST::Client.new do |config|
+  twitter_client = Twitter::REST::Client.new do |config|
     config.consumer_key = ENV["ONETWEET_CONSUMER_KEY"]
     config.consumer_secret = ENV["ONETWEET_CONSUMER_SECRET"]
     config.access_token = ENV["ONETWEET_ACCESS_TOKEN"]
     config.access_token_secret = ENV["ONETWEET_ACCESS_SECRET"]
   end
-  set :onetweet, onetweet_client
+  set :twitter, twitter_client
 end
 
 helpers do
