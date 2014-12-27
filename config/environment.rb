@@ -14,22 +14,28 @@ configure do
   set :server, 'webrick' # needed because sinatra thinks the twitter gem is a server.
   set :app_file, File.expand_path(File.join(File.dirname(__FILE__), "..", "app.rb"))
   set :haml, { :format => :html5 }
-
-  use Rack::Session::Cookie
-  use OmniAuth::Builder do
-    provider :twitter, ENV["AUTH_CONSUMER_KEY"], ENV["AUTH_CONSUMER_SECRET"],
-      {
-      :authorize_params => { :force_login => 'true' }
-    }
-  end
+  use Rack::Session::Cookie # required by omniauth
 end
 
 configure :development do
   set :database, 'sqlite:///db/dev.sqlite3'
   set :show_exceptions, true
+
+  # configure fake /auth/twitter route for dev purposes
+  get '/auth/twitter' do
+    env['omniauth.auth'] = { 'uid' => 0xdeadbeef, 'info' => { 'nickname' => "deadbeef" } }
+    status, headers, body = call env.merge("PATH_INFO" => '/auth/twitter/callback')
+    [status, headers, body.map(&:upcase)]
+  end
 end
 
 configure :production do
+  # configures get '/auth/twitter' route automatically
+  use OmniAuth::Builder do
+    provider :twitter, ENV["AUTH_CONSUMER_KEY"], ENV["AUTH_CONSUMER_SECRET"],
+      { :authorize_params => { :force_login => 'true' } }
+  end
+
   db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/mydb')
 
   ActiveRecord::Base.establish_connection(
