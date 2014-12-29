@@ -34,10 +34,8 @@ end
 
 # Regular routes
 get '/' do
-  if !logged_in?
+  if @user_tweet.nil?
     haml :'index/new'
-  elsif @user_tweet.nil?
-    haml :'index/ready'
   else
     haml :'index/done'
   end

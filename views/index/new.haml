@@ -1,12 +1,24 @@
 %p
-	Hi there!
+	- if logged_in?
+		= "Hi there #{@user_nick}!"
+	- else
+		= "Hi there!"
 %p
 	What would you say if you only had one tweet?
 %p
 	Can't think of anything? Need some time?
 %p
-	That's ok, it's good to stop and think about it.  Why not take some time to ponder and come back here when you feel you've found what you want to say?
+	That's okay, it's good to stop and think about it.  Go ahead, take some time to ponder it.  Come back after you've found what you want to say.
 %p
-	Before you can tweet, you'll have to
-	%a{ :href => "/auth/twitter" } login
+	- if !logged_in?
+		Before you can tweet, you'll have to
+		%a{ :href => "/auth/twitter" } log in.
+	- else
+		%a{ :href => "/logout" } log out
 
+- if logged_in?
+	%p
+		%form{ :action => "/tweet", :method => "post" }
+			%label What will you say?
+			%input{ :id => "message", :name => "message", :type => "text" }
+			%input{ :type => "submit", :value => "tweet!" }
