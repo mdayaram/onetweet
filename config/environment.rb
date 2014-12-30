@@ -64,6 +64,7 @@ helpers do
   def logout_user
     session[:uid] = nil
     session[:nick] = nil
+    session[:draft] = nil
   end
   def logged_in?
     !session[:uid].nil?
@@ -73,6 +74,12 @@ helpers do
   end
   def user_nick
     session[:nick]
+  end
+  def user_draft
+    session[:draft]
+  end
+  def save_draft(message)
+    session[:draft] = message
   end
 
 end

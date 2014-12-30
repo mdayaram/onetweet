@@ -42,15 +42,16 @@ get '/' do
 end
 
 post '/tweet' do
+  message = params[:message]
   if !logged_in?
-    return "You need to login in order to tweet!"
+    save_draft(message)
+    return redirect to("/auth/twitter")
   elsif !@user_tweet.nil?
     return "You've already tweeted this phrase: #{@user_tweet}"
   end
 
-  message = params[:message]
   if message.nil? || message.empty?
-    redirect to("/")
+    return redirect to("/")
   end
 
   tweet = Tweet.new do |t|
@@ -64,5 +65,6 @@ post '/tweet' do
   rescue Exception => e
     return "Oh no! There was an error when tweeting!\n#{e.message}"
   end
+  save_draft(nil)
   redirect to("/")
 end

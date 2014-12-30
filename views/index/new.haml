@@ -16,9 +16,8 @@
 	- else
 		%a{ :href => "/logout" } log out
 
-- if logged_in?
-	%p
-		%form{ :action => "/tweet", :method => "post" }
-			%label What will you say?
-			%input{ :id => "message", :name => "message", :type => "text" }
-			%input{ :type => "submit", :value => "tweet!" }
+%p
+	%form{ :action => "/tweet", :method => "post" }
+		%label What will you say?
+		%input{ :id => "message", :name => "message", :type => "text", :value => user_draft }
+		%input{ :type => "submit", :value => "tweet!" }
