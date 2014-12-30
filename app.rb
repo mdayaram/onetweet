@@ -35,9 +35,9 @@ end
 # Regular routes
 get '/' do
   if @user_tweet.nil?
-    haml :'index/new'
+    haml :new
   else
-    haml :'index/done'
+    haml :done
   end
 end
 
