@@ -28,3 +28,12 @@ If using bundler...
 ```bash
 $ bundle exec ruby app.rb
 ```
+
+Tweeting while in development will log you in using a fake account called
+"user" appended with a number.  Every time you tweet it will increment the
+number on the user.
+
+Tweets created while in development will not be tweeted to the actual
+onetweetnotypos account, but will remain persisted in the local db.
+
+

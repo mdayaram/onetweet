@@ -20,10 +20,14 @@ end
 configure :development do
   set :database, 'sqlite:///db/dev.sqlite3'
   set :show_exceptions, true
+  set :user_ct, Tweet.count
 
   # configure fake /auth/twitter route for dev purposes
   get '/auth/twitter' do
-    env['omniauth.auth'] = { 'uid' => 0xdeadbeef, 'info' => { 'nickname' => "deadbeef" } }
+    uid = settings.user_ct
+    unick = "user_#{settings.user_ct}"
+    env['omniauth.auth'] = { 'uid' => uid , 'info' => { 'nickname' => unick } }
+    settings.user_ct += 1
     status, headers, body = call env.merge("PATH_INFO" => '/auth/twitter/callback')
     [status, headers, body.map(&:upcase)]
   end
