@@ -18,3 +18,13 @@ Don't really know what's gonna happen, or if it'll even get used.  The project
 is almost designed in a way that would make it not go viral, so I doubt it'll
 get much attention, but the attention it gets will be interesting, I'm sure.
 
+## Testing
+
+```bash
+$ ruby app.rb
+```
+
+If using bundler...
+```bash
+$ bundle exec ruby app.rb
+```
