@@ -9,7 +9,7 @@
 			= user_draft
 		%br
 		- if logged_in?
-			%input{ :id => "submit", :type => "submit", :value => "Tweet as #{@user_nick}" }
+			%input{ :id => "submit", :type => "submit", :value => "Tweet as @#{@user_nick}" }
 		- else
 			%input{ :id => "submit", :type => "submit", :value => "Login & Tweet" }
 

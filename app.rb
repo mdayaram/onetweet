@@ -10,9 +10,6 @@ before do
     tweet = Tweet.where(uid: user_id).first
     @user_tweet = tweet.message if !tweet.nil?
     @user_nick = user_nick
-  else
-    # make sure we clear out any stale saved state.
-    logout_user
   end
 end
 
