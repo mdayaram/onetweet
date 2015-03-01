@@ -1,5 +1,8 @@
-notypos
+OneTweet
 ========
+
+Follow the twitter account: <a
+href="https://twitter.com/onetweetnotypos">@onetweetnotypos</a>
 
 Created by <a href="http://noj.cc">noj</a>, with major contributions and ideas
 from <a href="https://twitter.com/sharonw">Sharon Wong</a>,
