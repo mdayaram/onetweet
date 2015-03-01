@@ -6,8 +6,9 @@ href="https://twitter.com/onetweetnotypos">@onetweetnotypos</a>
 
 Created by <a href="http://noj.cc">noj</a>, with major contributions and ideas
 from <a href="https://twitter.com/sharonw">Sharon Wong</a>,
-<a href="http://www.tatyanabrown.com/">Tatyana Brown</a>, and
-<a href="https://twitter.com/binaryderrick">Derrick Carr</a>.
+<a href="http://www.tatyanabrown.com/">Tatyana Brown</a>,
+<a href="https://twitter.com/binaryderrick">Derrick Carr</a>, and
+<a href="https://www.facebook.com/pajoux">Philippe Ajoux</a>.
 
 ## What would you say if you only had one tweet?
 
