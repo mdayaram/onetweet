@@ -1,19 +1,21 @@
-%p
-	- if logged_in?
-		= "Hi there, #{@user_nick}!"
-	- else
-		= "Hi there, stranger!"
-%p
-	What would you say if you only had one tweet?
+.blob-norm
+	.content
+		%h1
+			OneTweet
 
-%p
+.blob-msg
 	%form{ :action => "/tweet", :method => "post" }
-		%input{ :id => "message", :name => "message", :type => "text", :value => user_draft }
-		%input{ :type => "submit", :value => "tweet!" }
+		%textarea{ :id => "message", :name => "message", :autofocus => "autofocus", :placeholder => "What would you say if you only had one tweet?" }
+			= user_draft
+		%br
+		- if logged_in?
+			%input{ :id => "submit", :type => "submit", :value => "Tweet as #{@user_nick}" }
+		- else
+			%input{ :id => "submit", :type => "submit", :value => "Login & Tweet" }
 
-%p
-	Can't think of anything? Need some time?
+.blob-norm
+	.content
+		%p
+			Can't think of anything? Need some time?  That's okay, come back after you've found what you want to say.
 
-%p
-	That's okay, it's good to stop and think about it.  Go ahead, take some time to ponder it.  Come back after you've found what you want to say.
-
+		= haml :footer

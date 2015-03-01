@@ -1,8 +1,30 @@
-body {
-  font-family: Georgia, serif;
-  text-align: center;
+$content_width: 704px;
+@font-face {
+  font-family: 'proxima_novalight';
+  src: url(/fonts/proxima_nova_light-webfont.woff) format("woff");
+  font-weight: 400;
+  font-style: normal;
 }
 
+body {
+  font-family: proxima_novalight;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  background-color: #F2F5F8;
+}
+
+h1 {
+  color: #42454E;
+  font-family: proxima_novalight;
+  font-size: 2.0em;
+  font-weight: 700;
+  line-height: 1.07692;
+  position: relative;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
 
 a { color: #000; }
 a:link { color: #000; }
@@ -10,27 +32,59 @@ a:visited { color: #000; }
 a:hover { color: #000; }
 a:active { color: #000; }
 
+.blob-norm {
+  width: 100%;
+  background-color: #F2F5F8;
+}
+
+.blob-msg {
+  width: 100%;
+  background-color: #FFFFFF;
+}
+
+.content {
+  padding: 0;
+  margin: 0 auto 0 auto;
+  width: $content_width;
+  text-align: center;
+}
+
 .content > a { text-decoration: none; color: #0084B4; }
 .content > a:link { text-decoration: none; color: #0084B4; }
 .content > a:visited { text-decoration: none; color: #0084B4; }
 .content > a:hover { text-decoration: none; color: #0084B4; }
 .content > a:active { text-decoration: none; color: #0084B4; }
 
+p {
+  max-width: $content_width;
+}
 
-footer {
-  background-color: #ffffff;
-  color: #999999;
-  text-shadow: 0.1em 0.1em #efefef;
-  border-top: solid 1px rgba(0,0,0,.25);
+#message, p {
+  font-family: proxima_novalight;
+  font-size: 1.3em;
+  font-weight: 400;
+  letter-spacing: 0.04em;
   text-align: center;
-  line-height: 2;
-  font-size: 10px;
-  font-family: sans-serif;
-  clear: both;
-  padding: 10px 0px;
-  margin-top: 20px;
-  p {
-    padding: 0px;
-    margin: 0px;
-  }
+}
+
+#message {
+  background-color: #FFFFFF;
+  border: 0;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+#submit {
+  margin: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  height: 32px;
+  color: #fff;
+  background-color: #2FC2EF;
+  background: rgba(47,194,239,.8);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }

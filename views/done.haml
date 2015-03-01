@@ -1,11 +1,19 @@
-%p
-	= "Hi there @#{@user_nick}!"
-%p I see you've already tweeted this beautiful phrase:
-%p
-	= @user_tweet
-%p Thank you for your tweet.
-%p Would like to give someone else a chance to tweet?
-%p
-	Feel free to
-	%a{ :href => "/logout" } logout
-	to go back.
+.blob-norm
+	.content
+		%h1 OneTweet
+		%p I see you've already tweeted your onetweet:
+
+.blob-msg
+	.content
+		#message
+			= "\"#{@user_tweet}\" - @#{@user_nick}"
+
+.blob-norm
+	.content
+		%p Thank you for your lovely phrase.
+		%p
+			Want to let someone else onetweet?
+			%a{ :href => "/logout" } Logout
+			to go back.
+
+		= haml :footer

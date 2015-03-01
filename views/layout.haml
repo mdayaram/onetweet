@@ -6,18 +6,8 @@
 		%title One Tweet, No Typos
 		%link{:href=>'/styles/main.css', :media => "screen", :rel => 'stylesheet', :type => "text/css"}
 	%body
-		.content
-			= yield
+		= yield
 
-			.tweets
-				<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/onetweetnotypos" data-widget-id="549727035707625472">Tweets by @onetweetnotypos</a>
-				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-		%footer
-			%p
-				Copyright &copy; <a href="http://noj.cc">Manoj Dayaram</a>
-			%p
-				Want to contribue? Submit a PR in <a href="https://github.com/mdayaram/notypos">Github</a>.
 
 		<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
