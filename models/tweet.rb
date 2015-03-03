@@ -16,8 +16,8 @@ class Tweet < ActiveRecord::Base
   private
 
   def publish
-    msg = "#{tweet_header}#{message}#{tweet_footer}"
-    raise "Message longer than 140 characters!" if msg.length > 140
+    msg = "#{tweet_header}#{self.message}#{tweet_footer}"
+    raise "Message longer than 140 characters! (#{msg.length})" if msg.length > 140
     @@client.update(msg) if !@@client.nil?
     puts "TWEET: #{msg}"
   end
@@ -31,10 +31,11 @@ class Tweet < ActiveRecord::Base
   end
 
   def trim_message
-    cap = 140 - tweet_footer.length - tweet_header.length - message.length
+    cap = 140 - tweet_footer.length - tweet_header.length - self.message.length
     if cap < 0
       # remove the excess from the message, minus 3 for an added ellipse.
-      message = message[0..(message.length + cap - 1 - 3)] + "..."
+      tmp = self.message.dup
+      self.message = tmp[0..(tmp.length + cap - 1 - 3)] + "..."
     end
     true
   end
