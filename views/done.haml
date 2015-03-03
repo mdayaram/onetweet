@@ -6,7 +6,8 @@
 .blob-msg
 	.content
 		#message
-			= "\"#{@user_tweet}\" - @#{@user_nick}"
+			:escaped
+				"#{@user_tweet}" - @#{@user_nick}
 
 .blob-norm
 	.content
