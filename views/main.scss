@@ -5,6 +5,12 @@ $content_width: 704px;
   font-weight: 400;
   font-style: normal;
 }
+a { color: #000; }
+a:link { color: #000; }
+a:visited { color: #000; }
+a:hover { color: #000; }
+a:active { color: #000; }
+
 
 body {
   font-family: proxima_novalight;
@@ -26,12 +32,6 @@ h1 {
   letter-spacing: 0.1em;
 }
 
-a { color: #000; }
-a:link { color: #000; }
-a:visited { color: #000; }
-a:hover { color: #000; }
-a:active { color: #000; }
-
 .blob-norm {
   width: 100%;
   background-color: #F2F5F8;
@@ -45,7 +45,7 @@ a:active { color: #000; }
 .content {
   padding: 0;
   margin: 0 auto 0 auto;
-  width: $content_width;
+  max-width: $content_width;
   text-align: center;
 }
 
@@ -57,17 +57,18 @@ a:active { color: #000; }
 
 p {
   max-width: $content_width;
-}
-
-#message, p {
   font-family: proxima_novalight;
-  font-size: 1.3em;
-  font-weight: 400;
-  letter-spacing: 0.04em;
+  font-size: 1em;
   text-align: center;
+  letter-spacing: 0.04em;
 }
 
 #message {
+  font-family: proxima_novalight;
+  font-size: 2em;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-align: center;
   background-color: #FFFFFF;
   border: 0;
   width: 100%;
