@@ -23,7 +23,7 @@ GEM
     haml (5.0.0)
       temple (>= 0.8.0)
       tilt
-    hashie (3.3.2)
+    hashie (4.1.0)
     http (0.5.0)
       http_parser.rb
     http_parser.rb (0.6.0)
@@ -36,9 +36,9 @@ GEM
     multi_json (1.14.1)
     multipart-post (2.0.0)
     oauth (0.4.7)
-    omniauth (1.2.2)
-      hashie (>= 1.2, < 4)
-      rack (~> 1.0)
+    omniauth (1.9.1)
+      hashie (>= 3.4.6)
+      rack (>= 1.6.2, < 3)
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
