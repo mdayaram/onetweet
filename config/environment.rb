@@ -18,7 +18,7 @@ configure do
 end
 
 configure :development do
-  set :database, 'sqlite:///db/dev.sqlite3'
+  set :database, { adapter: 'sqlite3', database: 'db/dev.sqlite3' }
   set :show_exceptions, true
   set :user_ct, Tweet.count
 

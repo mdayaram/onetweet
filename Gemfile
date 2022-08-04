@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "2.6.5"
+ruby "3.1.0"
 
 gem 'bundler'
 gem 'sinatra'
@@ -14,6 +14,7 @@ gem 'rake'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'twitter'
+gem 'webrick'
 
 group :development do
   gem 'sqlite3'
