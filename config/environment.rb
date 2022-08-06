@@ -14,7 +14,7 @@ configure do
   set :server, 'webrick' # needed because sinatra thinks the twitter gem is a server.
   set :app_file, File.expand_path(File.join(File.dirname(__FILE__), "..", "app.rb"))
   set :haml, { :format => :html5 }
-  use Rack::Session::Cookie # required by omniauth
+  use Rack::Session::Cookie, secret: ENV["RACK_COOKIE_SECRET"] # required by omniauth
 end
 
 configure :development do
