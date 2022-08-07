@@ -45,26 +45,24 @@ post '/tweet' do
   message = params[:message]
   if !logged_in?
     save_draft(message)
-    return redirect to("/auth/twitter")
+    haml :login
   elsif !@user_tweet.nil?
     return "You've already tweeted this phrase: #{@user_tweet}"
-  end
-
-  if message.nil? || message.empty?
+  elsif message.nil? || message.empty?
     return redirect to("/")
-  end
+  else
+    tweet = Tweet.new do |t|
+      t.user = user_nick
+      t.uid = user_id
+      t.message = message
+    end
 
-  tweet = Tweet.new do |t|
-    t.user = user_nick
-    t.uid = user_id
-    t.message = message
+    begin
+      tweet.save!
+    rescue Exception => e
+      return "Oh no! There was an error when tweeting!\n#{e.message}"
+    end
+    save_draft(nil)
+    redirect to("/")
   end
-
-  begin
-    tweet.save!
-  rescue Exception => e
-    return "Oh no! There was an error when tweeting!\n#{e.message}"
-  end
-  save_draft(nil)
-  redirect to("/")
 end

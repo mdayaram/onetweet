@@ -1,0 +1,10 @@
+.blob-norm
+	.content
+		%h1 OneTweet
+		%p In order to post your onetweet, you must first log in to Twitter.
+
+.blob-norm
+	%form{ :action => "/auth/twitter", :method => "post" }
+		%input{ :id => "submit", :type => "submit", :value => "Login & Tweet" }
+
+		= haml :footer
